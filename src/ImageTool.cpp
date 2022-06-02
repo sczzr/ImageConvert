@@ -2,9 +2,9 @@
 // Created by Caste on 2022/5/13.
 //
 #include <iostream>
-#include "SourceImage.h"
-#include "Command.h"
 #include <stdio.h>
+#include "Command.h"
+#include "SourceImage.h"
 using namespace ImageTool;
 
 int main(int argc, const char* argv[])

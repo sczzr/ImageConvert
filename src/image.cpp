@@ -2,8 +2,8 @@
 // Created by Caste on 2022/5/27.
 //
 
-#include "ImageType.h"
-#include "SourceImage.h"
+#include "image.h"
+#include "sourceimage.h"
 
 namespace ImageTool {
 

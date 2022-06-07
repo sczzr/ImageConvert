@@ -2,7 +2,7 @@
 // Created by Caste on 2022/5/27.
 //
 
-#include "ImageFileHeader.h"
+#include "imagefileheader.h"
 
 namespace ImageTool {
 } // ImageTool

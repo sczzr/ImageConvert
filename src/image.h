@@ -5,7 +5,7 @@
 #ifndef PNGTOOL_IMAGETYPE_H
 #define PNGTOOL_IMAGETYPE_H
 
-#include "../tool/Color.h"
+#include "../tool/color.h"
 
 namespace ImageTool {
     class ImageType {

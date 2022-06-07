@@ -1,7 +1,7 @@
 //
 // Created by Caste on 2022/5/13.
 //
-#include "SourceImage.h"
+#include "sourceimage.h"
 #include "lodepng.h"
 
 using namespace ImageTool;

@@ -5,7 +5,7 @@
 #ifndef PNGTOOL_SOURCEIMAGE_H
 #define PNGTOOL_SOURCEIMAGE_H
 
-#include "ImageType.h"
+#include "image.h"
 
 namespace ImageTool {
     class SourceImage : public ImageType {

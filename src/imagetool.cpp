@@ -3,8 +3,8 @@
 //
 #include <iostream>
 #include <stdio.h>
-#include "Command.h"
-#include "SourceImage.h"
+#include "command.h"
+#include "sourceimage.h"
 using namespace ImageTool;
 
 int main(int argc, const char* argv[])

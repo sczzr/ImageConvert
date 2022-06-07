@@ -14,10 +14,9 @@ namespace General {
         const char * GetPath() const;
         const char * GetFileName() const;
     private:
-        std::string m_ResourcePath;
-        std::string m_Path;
-        std::string m_Filename;
-
+        std::string m_sResourcePath;
+        std::string m_sPath;
+        std::string m_sFilename;
     };
 
 } // General

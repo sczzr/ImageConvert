@@ -5,7 +5,7 @@
 #ifndef PNGTOOL_IMAGEFILE_H
 #define PNGTOOL_IMAGEFILE_H
 
-#include "ImageType.h"
+#include "image.h"
 
 namespace ImageTool {
 

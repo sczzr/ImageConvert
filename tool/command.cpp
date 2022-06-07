@@ -2,7 +2,7 @@
 // Created by Caste on 2022/5/18.
 //
 
-#include "Command.h"
+#include "command.h"
 #include <stdio.h>
 #include <string.h>
 #include <cstdlib>

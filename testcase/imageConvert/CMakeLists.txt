@@ -8,3 +8,4 @@ add_executable(${PROJECT_NAME} imagetool.cpp)
 
 target_link_libraries(${PROJECT_NAME} third-party)
 target_link_libraries(${PROJECT_NAME} tool)
+target_link_libraries(${PROJECT_NAME} src)

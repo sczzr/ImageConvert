@@ -60,7 +60,7 @@ bool Command::ProcessCommandLineArguments(int a_iArgs, const char *a_apstrArgs[]
             ++iArg;
             if(iArg >= a_iArgs)
             {
-                printf("Error: missing decode argument for -output.\n");
+                printf("Error: missing Encode argument for -output.\n");
                 return true;
             }
             else
@@ -74,7 +74,7 @@ bool Command::ProcessCommandLineArguments(int a_iArgs, const char *a_apstrArgs[]
             ++iArg;
             if(iArg >= a_iArgs)
             {
-                printf("Error: missing decode argument for -output.\n");
+                printf("Error: missing Encode argument for -output.\n");
                 return true;
             }
             else
@@ -101,7 +101,7 @@ bool Command::ProcessCommandLineArguments(int a_iArgs, const char *a_apstrArgs[]
 
     if(pstrOutputImage == nullptr)
     {
-        printf("Error: missing -output encode image.\n");
+        printf("Error: missing -output Encode image.\n");
     }
     return false;
 }

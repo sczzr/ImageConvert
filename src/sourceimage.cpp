@@ -6,22 +6,35 @@
 
 using namespace ImageTool;
 
-SourceImage::SourceImage(const char *filename, Filetype type) : m_filename(filename), m_uiWidth(), m_uiHeight(), m_ptr() {
-    decode(type);
+
+SourceImage::SourceImage():
+    m_pstrFilename(),
+    m_uiWidth(),
+    m_uiHeight(),
+    m_ptrSourcePixels() {
+
+}
+
+SourceImage::SourceImage(const char *a_pstrFilename, Filetype a_eFiletype) :
+        m_pstrFilename(a_pstrFilename),
+        m_uiWidth(),
+        m_uiHeight(),
+        m_ptrSourcePixels() {
+    Decode(nullptr, a_eFiletype);
 }
 
 
 SourceImage::~SourceImage() {
-    if (m_ptr != nullptr) {
-        free(m_ptr);
+    if (m_ptrSourcePixels != nullptr) {
+        free(m_ptrSourcePixels);
     }
 }
 
-void SourceImage::decode(Filetype type) {
-    if (m_ptr == nullptr) {
-        switch (type) {
+void SourceImage::Decode(const char *a_pstrFileName, Filetype a_eFiletype) {
+    if (m_ptrSourcePixels == nullptr) {
+        switch (a_eFiletype) {
             case Filetype::PNG:
-                lodepng_decode_file(&m_ptr, &m_uiWidth, &m_uiHeight, m_filename, LCT_RGBA, 8);
+                lodepng_decode_file(&m_ptrSourcePixels, &m_uiWidth, &m_uiHeight, m_pstrFilename, LCT_RGBA, 8);
                 break;
             default:
                 break;
@@ -29,12 +42,7 @@ void SourceImage::decode(Filetype type) {
     }
 }
 
-void SourceImage::encode(const char *name) {
-    lodepng_encode32_file(name, m_ptr, m_uiWidth, m_uiHeight);
-}
-
-void SourceImage::
-save(const char *name) {
+void SourceImage::save(const char *a_pstrOutName) {
     int width = m_uiWidth;
     int height = m_uiHeight;
     int channel = 4;
@@ -48,10 +56,10 @@ save(const char *name) {
         if (i < m_uiHeight) {
             for (int j = 0; j < stride; j += channel) {
                 if (j < m_uiWidth * channel) {
-                    uint32_t r = m_ptr[i * m_uiWidth * channel + j];
-                    uint32_t g = m_ptr[i * m_uiWidth * channel + j + 1];
-                    uint32_t b = m_ptr[i * m_uiWidth * channel + j + 2];
-                    uint32_t a = m_ptr[i * m_uiWidth * channel + j + 3];
+                    uint32_t r = m_ptrSourcePixels[i * m_uiWidth * channel + j];
+                    uint32_t g = m_ptrSourcePixels[i * m_uiWidth * channel + j + 1];
+                    uint32_t b = m_ptrSourcePixels[i * m_uiWidth * channel + j + 2];
+                    uint32_t a = m_ptrSourcePixels[i * m_uiWidth * channel + j + 3];
                     new_ptr[i * stride + j] = r * a >> 8;
                     new_ptr[i * stride + j + 1] = g * a >> 8;
                     new_ptr[i * stride + j + 2] = b * a >> 8;
@@ -60,27 +68,50 @@ save(const char *name) {
             }
         }
     }
-    lodepng_encode32_file(name, new_ptr, width, height);
+    lodepng_encode32_file(a_pstrOutName, new_ptr, width, height);
     free(new_ptr);
 }
 
-void SourceImage::save(const char *name, uint32_t width, uint32_t height) {
+void SourceImage::save(const char *a_pstrOutName, uint32_t a_uiWidth, uint32_t a_uiHeight) {
     int channel = 4;
-    int stride = width * channel;
-    uint8_t *new_ptr = (uint8_t *) malloc(width * m_uiHeight * channel);
-    for (int i = 0; i < height; ++i) {
+    int stride = a_uiWidth * channel;
+    uint8_t *new_ptr = (uint8_t *) malloc(a_uiWidth * m_uiHeight * channel);
+    for (int i = 0; i < a_uiHeight; ++i) {
         for (int j = 0; j < stride; j += channel) {
-            uint32_t r = m_ptr[i * m_uiWidth * channel + j];
-            uint32_t g = m_ptr[i * m_uiWidth * channel + j + 1];
-            uint32_t b = m_ptr[i * m_uiWidth * channel + j + 2];
-            uint32_t a = m_ptr[i * m_uiWidth * channel + j + 3];
+            uint32_t r = m_ptrSourcePixels[i * m_uiWidth * channel + j];
+            uint32_t g = m_ptrSourcePixels[i * m_uiWidth * channel + j + 1];
+            uint32_t b = m_ptrSourcePixels[i * m_uiWidth * channel + j + 2];
+            uint32_t a = m_ptrSourcePixels[i * m_uiWidth * channel + j + 3];
             new_ptr[i * stride + j] = r * a >> 8;
             new_ptr[i * stride + j + 1] = g * a >> 8;
             new_ptr[i * stride + j + 2] = b * a >> 8;
             new_ptr[i * stride + j + 3] = a;
         }
     }
-    lodepng_encode32_file(name, new_ptr, width, m_uiHeight);
+    lodepng_encode32_file(a_pstrOutName, new_ptr, a_uiWidth, m_uiHeight);
     free(new_ptr);
 }
+
+void SourceImage::Encode(const char *a_pstrFileName, Filetype a_eFiletype, unsigned int a_uiWidth,
+                         unsigned int a_uiHeight) {
+    switch (a_eFiletype) {
+        case Filetype::PNG:
+            lodepng_encode32_file(a_pstrFileName, m_ptrSourcePixels, a_uiWidth, a_uiHeight);
+            break;
+        default:
+            break;
+    }
+}
+
+void SourceImage::Encode(const char *a_pstrFileName, Filetype a_eFiletype, unsigned int a_uiWidth,
+                         unsigned int a_uiHeight, unsigned char *a_ptrPixels) {
+    switch (a_eFiletype) {
+        case Filetype::PNG:
+            lodepng_encode32_file(a_pstrFileName, a_ptrPixels, a_uiWidth, a_uiHeight);
+            break;
+        default:
+            break;
+    }
+}
+
 

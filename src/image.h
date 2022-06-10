@@ -6,27 +6,9 @@
 #define PNGTOOL_IMAGETYPE_H
 
 #include "../tool/color.h"
+#include "sourceimage.h"
 
 namespace ImageTool {
-    class ImageType {
-    public:
-        enum class Filetype {
-            None = 0,
-            PNG,
-            JPG,
-            PPM
-        };
-
-        enum class Format {
-            None = 0,
-            RGB565,
-            BGR565,
-            RGB888,
-            BGR888,
-            RGBA8888,
-            BGRA8888
-        };
-    };
 
     class Image : public ImageType {
     public:
@@ -40,12 +22,18 @@ namespace ImageTool {
 
         int Save(const char *a_pstrFilename, Filetype a_efileType = ImageType::Filetype::PNG);
 
-        int Save(const char *a_pstrFilename, unsigned int a_uiWidth, unsigned int a_uiHeight,
-                 Filetype a_efileType = ImageType::Filetype::PNG);
+        int Save(const char *a_pstrFilename, Filetype a_efileType, unsigned int a_uiWidth,
+                 unsigned int a_uiHeight);
 
-        int SaveAlign(const char *a_pstrFilename, unsigned int a_uiAlignX, unsigned int a_uiAlignY,
-                      Filetype a_efileType = ImageType::Filetype::PNG, const General::Color &a_rCFillColor = General::Color());
+        int SaveAlign(const char *a_pstrFilename, Filetype a_efileType, unsigned int a_uiHAlignCoef,
+                      unsigned int a_uiVAlignCoef, const General::Color &a_rCFillColor = General::Color());
 
+
+        int SavePreMulAlphaWithAlign(const char *a_pstrFilename, Filetype a_efileType, unsigned int a_uiHAlignCoef,
+                                     unsigned int a_uiVAlignCoef, const General::Color &a_rCFillColor = General::Color());
+
+    private:
+        SourceImage m_SourceImage;
     };
 
 } // ImageTool

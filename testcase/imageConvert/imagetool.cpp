@@ -5,15 +5,17 @@
 #include <stdio.h>
 #include "command.h"
 #include "sourceimage.h"
+#include "resource.h"
+#include "image.h"
+
 using namespace ImageTool;
 
-int main(int argc, const char* argv[])
-{
+
+int main(int argc, const char *argv[]) {
     Command command;
-    if (command.ProcessCommandLineArguments(argc,argv))
-    {
+    if (command.ProcessCommandLineArguments(argc, argv)) {
         exit(1);
     }
-    SourceImage png(command.sourceImage());
-    png.save(command.pstrOutputImage);
+    Image image(command.sourceImage());
+    image.SavePreMulAlphaWithAlign(command.sourceImage(), ImageTool::ImageType::Filetype::PNG, 16, 4);
 }

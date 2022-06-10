@@ -8,5 +8,5 @@ file(GLOB SOURCES
 	${PROJECT_SOURCE_DIR}/*.h
 	${PROJECT_SOURCE_DIR}/*.cpp)
 
-add_library(${PROJECT_NAME} STATIC ${SOURCES})
+add_library(${PROJECT_NAME} STATIC ${SOURCES} imagetype.cpp imagetype.h)
 add_library(lib::src ALIAS ${PROJECT_NAME})

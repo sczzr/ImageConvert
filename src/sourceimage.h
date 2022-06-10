@@ -5,12 +5,13 @@
 #ifndef PNGTOOL_SOURCEIMAGE_H
 #define PNGTOOL_SOURCEIMAGE_H
 
-#include "image.h"
+#include "imagetype.h"
 
 namespace ImageTool {
     class SourceImage : public ImageType {
     public:
 
+        SourceImage();
 
         SourceImage(const char *a_pstrFilename, Filetype a_eFiletype);
 
@@ -20,22 +21,24 @@ namespace ImageTool {
 
         unsigned int Height() const { return m_uiHeight; }
 
-        unsigned char *Pixels() const { return m_ptr; }
+        unsigned char *Pixels() const { return m_ptrSourcePixels; }
 
-        void save(const char *name);
+        void save(const char *a_pstrOutName);
 
-        void save(const char *name, unsigned int width, unsigned int height);
+        void save(const char *a_pstrOutName, unsigned int a_uiWidth, unsigned int a_uiHeight);
 
-    private:
-        void decode(Filetype type);
+        void Decode(const char *a_pstrFileName, Filetype a_eFiletype);
 
-        void encode(const char *name);
+        void Encode(const char *a_pstrFileName, Filetype a_eFiletype, unsigned int a_uiWidth , unsigned int a_uiHeight);
+
+        void Encode(const char *a_pstrFileName, Filetype a_eFiletype, unsigned int a_uiWidth, unsigned int a_uiHeight,
+                    unsigned char *a_ptrPixels);
 
     private:
         unsigned int m_uiWidth;
         unsigned int m_uiHeight;
-        unsigned char *m_ptr;
-        const char *m_filename;
+        unsigned char *m_ptrSourcePixels;
+        const char *m_pstrFilename;
     };
 }
 

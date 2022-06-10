@@ -11,12 +11,14 @@ namespace General {
     class Resource {
     public:
         explicit Resource(const char* a_pstrResourcePath);
-        const char * GetPath() const;
-        const char * GetFileName() const;
-        const char * GetFileType() const;
+        const char * DirectoryPath() const;
+        const char * FilePath() const;
+        const char * FileName() const;
+        const char * FileType() const;
     private:
         std::string m_sResourcePath;
-        std::string m_sPath;
+        std::string m_sDirectoryPath;
+        std::string m_sFilePath;
         std::string m_sFilename;
         std::string m_sFiletype;
     };

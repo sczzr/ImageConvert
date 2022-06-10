@@ -23,10 +23,6 @@ namespace ImageTool {
 
         unsigned char *Pixels() const { return m_ptrSourcePixels; }
 
-        void save(const char *a_pstrOutName);
-
-        void save(const char *a_pstrOutName, unsigned int a_uiWidth, unsigned int a_uiHeight);
-
         void Decode(const char *a_pstrFileName, Filetype a_eFiletype);
 
         void Encode(const char *a_pstrFileName, Filetype a_eFiletype, unsigned int a_uiWidth , unsigned int a_uiHeight);
@@ -34,6 +30,10 @@ namespace ImageTool {
         void Encode(const char *a_pstrFileName, Filetype a_eFiletype, unsigned int a_uiWidth, unsigned int a_uiHeight,
                     unsigned char *a_ptrPixels);
 
+    private:
+        unsigned loadppm_decode_file(unsigned char** out, unsigned* w, unsigned* h, const char* filename,
+                                     unsigned bitdepth);
+        unsigned loadppm_encode_file(const char* filename, const unsigned char* image, unsigned w, unsigned h);
     private:
         unsigned int m_uiWidth;
         unsigned int m_uiHeight;

@@ -15,12 +15,12 @@ SourceImage::SourceImage():
 
 }
 
-SourceImage::SourceImage(const char *a_pstrFilename, Filetype a_eFiletype) :
-        m_pstrFilename(a_pstrFilename),
+SourceImage::SourceImage(const char *a_pstrFileName, Filetype a_eFiletype) :
+        m_pstrFilename(a_pstrFileName),
         m_uiWidth(),
         m_uiHeight(),
         m_ptrSourcePixels() {
-    Decode(nullptr, a_eFiletype);
+    Decode(a_pstrFileName, a_eFiletype);
 }
 
 
@@ -32,12 +32,17 @@ SourceImage::~SourceImage() {
 
 void SourceImage::Decode(const char *a_pstrFileName, Filetype a_eFiletype) {
     if (m_ptrSourcePixels == nullptr) {
+        unsigned err = 0;
         switch (a_eFiletype) {
             case Filetype::PNG:
-                lodepng_decode_file(&m_ptrSourcePixels, &m_uiWidth, &m_uiHeight, m_pstrFilename, LCT_RGBA, 8);
+                err = lodepng_decode_file(&m_ptrSourcePixels, &m_uiWidth, &m_uiHeight, a_pstrFileName, LCT_RGBA, 8);
                 break;
             default:
                 break;
+        }
+        if (err)
+        {
+            printf("load picture failed .\n");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace ImageTool {
 
         SourceImage();
 
-        SourceImage(const char *a_pstrFilename, Filetype a_eFiletype);
+        SourceImage(const char *a_pstrFileName, Filetype a_eFiletype);
 
         ~SourceImage();
 

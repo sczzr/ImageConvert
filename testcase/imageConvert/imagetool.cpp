@@ -17,5 +17,5 @@ int main(int argc, const char *argv[]) {
         exit(1);
     }
     Image image(command.sourceImage());
-    image.SavePreMulAlphaWithAlign(command.sourceImage(), ImageTool::ImageType::Filetype::PNG, 16, 4);
+    image.SavePreMulAlphaWithAlign(command.pstrOutputImage, ImageTool::ImageType::Filetype::PNG, 16, 4);
 }

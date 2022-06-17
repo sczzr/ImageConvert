@@ -105,22 +105,22 @@ Image::SavePreMulAlphaWithAlign(const char *a_pstrFilename, ImageType::Filetype 
 	uint8_t *new_ptr = (uint8_t *)malloc(size);
 	memset(new_ptr, 0, size);
 	memcpy(new_ptr, sourcePixels, sourceHeight * sourceWidth);
-//        for (int i = 0; i < height; ++i) {
-//            if (i < sourceHeight) {
-//                for (int j = 0; j < stride; j += channel) {
-//                    if (j < sourceWidth * channel) {
-//                        uint32_t r = sourcePixels[i * sourceWidth * channel + j];
-//                        uint32_t g = sourcePixels[i * sourceWidth * channel + j + 1];
-//                        uint32_t b = sourcePixels[i * sourceWidth * channel + j + 2];
-//                        uint32_t a = sourcePixels[i * sourceWidth * channel + j + 3];
-//                        new_ptr[i * stride + j] = r * a >> 8;
-//                        new_ptr[i * stride + j + 1] = g * a >> 8;
-//                        new_ptr[i * stride + j + 2] = b * a >> 8;
-//                        new_ptr[i * stride + j + 3] = a;
-//                    }
-//                }
-//            }
-//        }
+        for (int i = 0; i < height; ++i) {
+            if (i < sourceHeight) {
+                for (int j = 0; j < stride; j += channel) {
+                    if (j < sourceWidth * channel) {
+                        uint32_t r = sourcePixels[i * sourceWidth * channel + j];
+                        uint32_t g = sourcePixels[i * sourceWidth * channel + j + 1];
+                        uint32_t b = sourcePixels[i * sourceWidth * channel + j + 2];
+                        uint32_t a = sourcePixels[i * sourceWidth * channel + j + 3];
+                        new_ptr[i * stride + j] = r * a >> 8;
+                        new_ptr[i * stride + j + 1] = g * a >> 8;
+                        new_ptr[i * stride + j + 2] = b * a >> 8;
+                        new_ptr[i * stride + j + 3] = a;
+                    }
+                }
+            }
+        }
 	m_SourceImage->Encode(a_pstrFilename, a_efileType, width, height, new_ptr);
 	free(new_ptr);
 	return 1;

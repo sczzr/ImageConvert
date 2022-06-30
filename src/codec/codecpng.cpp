@@ -11,14 +11,16 @@ namespace ImageTool {
     }
 
     void CodecPng::Decode(unsigned char **a_ptrOutputData, unsigned *a_uiWidth, unsigned *a_uiHeight,
-                          const unsigned char *a_ptrInData, unsigned a_uiInSize) {
-        lodepng_decode_memory(a_ptrOutputData, a_uiWidth, a_uiHeight, a_ptrInData, a_uiInSize, LCT_RGB, 8);
+                          const unsigned char *a_ptrInData,
+                          unsigned a_uiInSize, ImageType::Format a_pixFormat, uint8_t ucBitDepth) {
+        lodepng_decode_memory(a_ptrOutputData, a_uiWidth, a_uiHeight, a_ptrInData, a_uiInSize, LCT_RGBA, ucBitDepth);
     }
 
-    void CodecPng::Encode(unsigned char **a_ptrOutputData, unsigned a_uiOutSize, unsigned a_uiHeight,
-                          const unsigned char *a_ptrInData, unsigned a_uiWidth) {
-        lodepng_encode_memory(a_ptrOutputData, reinterpret_cast<size_t *>(a_uiOutSize), a_ptrInData, a_uiWidth,
-                              a_uiHeight, LCT_RGB, 8);
+    void
+    CodecPng::Encode(unsigned char **a_ptrOutputData, unsigned *a_uiOutSize, unsigned a_uiWidth, unsigned a_uiHeight,
+                     const unsigned char *a_ptrInData, ImageType::Format a_pixFormat, uint8_t a_ucBitDepth) {
+        lodepng_encode_memory(a_ptrOutputData, a_uiOutSize, a_ptrInData, a_uiWidth,
+                              a_uiHeight, LCT_RGBA, a_ucBitDepth);
     }
 
 } // ImageTool

@@ -18,3 +18,37 @@ ImageType::Filetype ImageType::GetType(const char *type) {
         return ImageTool::ImageType::Filetype::None;
     }
 }
+
+uint8_t ImageType::GetDepth(ImageType::Format a_format) {
+    switch (a_format) {
+        case Format::RGB565:
+            return 16;
+        case Format::BGR565:
+            return 16;
+        case Format::RGB888:
+            return 24;
+        case Format::RGBA8888:
+            return 32;
+        case Format::BGRA8888:
+            return 32;
+        default:
+            return 0;
+    }
+}
+
+uint8_t ImageType::GetDepthByte(ImageType::Format a_format) {
+    switch (a_format) {
+        case Format::RGB565:
+            return 2;
+        case Format::BGR565:
+            return 2;
+        case Format::RGB888:
+            return 3;
+        case Format::RGBA8888:
+            return 4;
+        case Format::BGRA8888:
+            return 4;
+        default:
+            return 0;
+    }
+}

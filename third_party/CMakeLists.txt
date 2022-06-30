@@ -8,5 +8,3 @@ file(GLOB SOURCES
 
 add_library(${PROJECT_NAME} ${SOURCES})
 add_library(lib::third ALIAS ${PROJECT_NAME})
-
-

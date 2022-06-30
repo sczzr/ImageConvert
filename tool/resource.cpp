@@ -10,7 +10,7 @@ namespace General {
     Resource::Resource(const char *a_pstrResourcePath) :
             m_sResourcePath(a_pstrResourcePath) {
         std::size_t found = m_sResourcePath.find_last_of("/\\");
-        if (File(a_pstrResourcePath).isFile()) {
+        if (File(a_pstrResourcePath).IsFile()) {
             m_sDirectoryPath = m_sResourcePath.substr(0, found);
             m_sFilePath = m_sResourcePath;
             m_sFilename = m_sResourcePath.substr(found + 1);

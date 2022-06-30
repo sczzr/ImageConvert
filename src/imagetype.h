@@ -5,6 +5,8 @@
 #ifndef IMAGE_IMAGETYPE_H
 #define IMAGE_IMAGETYPE_H
 
+#include "stdint.h"
+
 namespace ImageTool {
     class ImageType {
     public:
@@ -26,6 +28,8 @@ namespace ImageTool {
         };
 
         Filetype GetType(const char *type);
+        uint8_t GetDepth(Format a_format);
+        static uint8_t GetDepthByte(Format a_format);
 
     };
 } // ImageTool
